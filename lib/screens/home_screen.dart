@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import '../models/apiary.dart';
 import '../services/storage_service.dart';
@@ -193,7 +194,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               shape: BoxShape.circle,
                               gradient: LinearGradient(colors: [AppTheme.primary, AppTheme.secondary]),
                             ),
-                            child: const Icon(Icons.hive, color: Colors.white), // Standard icon as placeholder for logo
+                            child: const Icon(Icons.hive, color: Colors.white), 
                           ),
                           const SizedBox(width: 12),
                           const Text(
@@ -202,38 +203,53 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ],
                       ),
-                      if (_currentWeather != null && !_loadingWeather)
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                              decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.6),
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(color: AppTheme.primary.withOpacity(0.3)),
-                              ),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    "${_currentWeather!.temperature.round()}°F",
-                                    style: const TextStyle(fontWeight: FontWeight.bold),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          if (_currentWeather != null && !_loadingWeather) ...[
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.6),
+                                    borderRadius: BorderRadius.circular(20),
+                                    border: Border.all(color: AppTheme.primary.withOpacity(0.3)),
                                   ),
-                                  const SizedBox(width: 4),
-                                  Text(
-                                    _currentWeather!.conditions,
-                                    style: const TextStyle(color: Colors.grey),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "${_currentWeather!.temperature.round()}°F",
+                                        style: const TextStyle(fontWeight: FontWeight.bold),
+                                      ),
+                                      const SizedBox(width: 4),
+                                      Text(
+                                        _currentWeather!.conditions,
+                                        style: const TextStyle(color: Colors.grey),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
+                                ),
+                                if (_confirmedApiary != null)
+                                  Text(
+                                    "${_confirmedApiary!.name} (${_confirmedApiary!.zipCode})",
+                                    style: const TextStyle(fontSize: 10, color: Colors.grey),
+                                  ),
+                              ],
                             ),
-                            if (_confirmedApiary != null)
-                              Text(
-                                "${_confirmedApiary!.name} (${_confirmedApiary!.zipCode})",
-                                style: const TextStyle(fontSize: 10, color: Colors.grey),
-                              ),
+                            const SizedBox(width: 12),
                           ],
-                        ),
+                          IconButton(
+                            icon: const Icon(Icons.logout, color: Colors.grey),
+                            tooltip: "Logout",
+                            onPressed: () async {
+                              await FirebaseAuth.instance.signOut();
+                            },
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
