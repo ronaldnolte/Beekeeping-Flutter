@@ -115,14 +115,13 @@ class _HivesScreenState extends State<HivesScreen> {
                 )
               : LayoutBuilder(
                   builder: (context, constraints) {
-                    final int crossAxisCount = constraints.maxWidth > 600 ? 2 : 1;
                     return GridView.builder(
                       padding: const EdgeInsets.all(16),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: crossAxisCount,
+                      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                        maxCrossAxisExtent: 500,
                         crossAxisSpacing: 16,
                         mainAxisSpacing: 16,
-                        childAspectRatio: 1.5, // Adjust based on card content height
+                        mainAxisExtent: 280, 
                       ),
                       itemCount: _hives.length,
                       itemBuilder: (context, index) {
