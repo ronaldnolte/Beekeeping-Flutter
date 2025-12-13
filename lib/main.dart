@@ -10,6 +10,7 @@ import 'screens/hive_details_screen.dart';
 import 'screens/inspections_screen.dart';
 import 'screens/tasks_screen.dart';
 import 'screens/interventions_screen.dart';
+import 'screens/manage_apiaries_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
