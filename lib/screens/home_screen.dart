@@ -350,20 +350,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       color: Colors.amber,
                                       route: '/hives',
                                     ),
-                                    _buildMenuCard(
-                                      title: "Inspections",
-                                      description: "Record and review inspections",
-                                      icon: LucideIcons.clipboardList,
-                                      color: Colors.blue,
-                                      route: '/inspections',
-                                    ),
-                                    _buildMenuCard(
-                                      title: "Interventions",
-                                      description: "Treatments and feedings",
-                                      icon: LucideIcons.stethoscope,
-                                      color: Colors.purple,
-                                      route: '/interventions',
-                                    ),
+
                                     _buildMenuCard(
                                       title: "Tasks",
                                       description: "To-do list for your apiary",
