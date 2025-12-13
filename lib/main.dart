@@ -56,6 +56,7 @@ class BeekeepingApp extends StatelessWidget {
         '/inspections': (context) => const InspectionsScreen(),
         '/tasks': (context) => const TasksScreen(),
         '/interventions': (context) => const InterventionsScreen(),
+        '/manage_apiaries': (context) => const ManageApiariesScreen(),
       },
     );
   }

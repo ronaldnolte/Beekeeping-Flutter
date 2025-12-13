@@ -5,7 +5,7 @@ import '../models/apiary.dart';
 import '../services/storage_service.dart';
 import '../services/weather_service.dart';
 import '../models/weather_models.dart';
-import '../widgets/add_apiary_dialog.dart';
+import 'manage_apiaries_screen.dart';
 import '../utils/theme.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -51,28 +51,19 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  void _handleAddApiary(Apiary apiary) async {
-    try {
-      await _storage.addApiary(apiary);
-      await _loadData(); // Reload list
-      
-      // Auto-select if first one
-      if (_apiaries.isEmpty) {
-        setState(() {
-          _selectedApiary = apiary;
-        });
       }
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Apiary created successfully")),
-        );
-      }
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Error creating apiary: $e"), backgroundColor: Colors.red),
-        );
-      }
+    }
+  }
+
+  Future<void> _handleSync() async {
+    await _loadData();
+    if (_confirmedApiary != null) {
+      await _fetchWeather(_confirmedApiary!.zipCode);
+    }
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Data synced successfully")),
+      );
     }
   }
 
@@ -292,6 +283,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                             const SizedBox(width: 8),
+                            const SizedBox(width: 8),
                             ElevatedButton(
                               onPressed: (_selectedApiary == null || _selectedApiary == _confirmedApiary)
                                   ? null
@@ -305,16 +297,28 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: const Text("OK", style: TextStyle(fontWeight: FontWeight.bold)),
                             ),
                             const SizedBox(width: 8),
-                            IconButton(
-                              icon: const Icon(Icons.add_circle, color: AppTheme.primary, size: 30),
-                              tooltip: "Create New Apiary",
-                              onPressed: () {
-                                 showDialog(
-                                  context: context,
-                                  builder: (_) => AddApiaryDialog(onAdd: _handleAddApiary),
-                                );
+                            OutlinedButton(
+                              onPressed: () async {
+                                await Navigator.pushNamed(context, '/manage_apiaries');
+                                _loadData(); // Refresh list on return
                               },
-                            )
+                              style: OutlinedButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                                side: const BorderSide(color: Colors.grey),
+                              ),
+                              child: const Text("Manage Apiaries", style: TextStyle(color: Colors.black87)),
+                            ),
+                            const SizedBox(width: 8),
+                            OutlinedButton.icon(
+                              onPressed: _handleSync,
+                              icon: const Icon(Icons.sync, size: 20),
+                              label: const Text("Sync Now"),
+                              style: OutlinedButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                                side: const BorderSide(color: Colors.grey),
+                                foregroundColor: Colors.black87,
+                              ),
+                            ),
                           ],
                         ),
                         

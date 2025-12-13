@@ -61,6 +61,17 @@ class StorageService {
         .doc(id)
         .delete();
   }
+
+  Future<void> updateApiary(Apiary apiary) async {
+    final uid = await _getUserId();
+    
+    await _db
+        .collection('users')
+        .doc(uid)
+        .collection('apiaries')
+        .doc(apiary.id)
+        .set(apiary.toJson());
+  }
   
   // --- Hives ---
 
