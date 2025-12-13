@@ -4,7 +4,7 @@ import '../models/apiary.dart';
 import '../services/storage_service.dart';
 
 class AddApiaryDialog extends StatefulWidget {
-  final Future<void> Function(Apiary) onAdd;
+  final Function(Apiary) onAdd;
 
   const AddApiaryDialog({super.key, required this.onAdd});
 
@@ -16,7 +16,6 @@ class _AddApiaryDialogState extends State<AddApiaryDialog> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _zipController = TextEditingController();
-  bool _isSaving = false;
 
   @override
   void dispose() {
@@ -25,24 +24,16 @@ class _AddApiaryDialogState extends State<AddApiaryDialog> {
     super.dispose();
   }
 
-  Future<void> _submit() async {
+  void _submit() {
     if (_formKey.currentState!.validate()) {
-      setState(() => _isSaving = true);
-      
       final apiary = Apiary(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
         name: _nameController.text.trim(),
         zipCode: _zipController.text.trim(),
         createdAt: DateTime.now().millisecondsSinceEpoch,
       );
-
-      try {
-        await widget.onAdd(apiary);
-        if (mounted) Navigator.pop(context);
-      } catch (e) {
-        // Error is handled by parent, but we stop loading
-        if (mounted) setState(() => _isSaving = false);
-      }
+      widget.onAdd(apiary);
+      Navigator.pop(context);
     }
   }
 
@@ -61,7 +52,6 @@ class _AddApiaryDialogState extends State<AddApiaryDialog> {
                 labelText: "Apiary Name",
                 hintText: "e.g., Backyard Hive",
               ),
-              enabled: !_isSaving,
               validator: (value) =>
                   value == null || value.isEmpty ? "Please enter a name" : null,
             ),
@@ -74,7 +64,6 @@ class _AddApiaryDialogState extends State<AddApiaryDialog> {
               ),
               keyboardType: TextInputType.number,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              enabled: !_isSaving,
               validator: (value) =>
                   value == null || value.length < 5 ? "Enter valid 5-digit ZIP" : null,
             ),
@@ -83,14 +72,12 @@ class _AddApiaryDialogState extends State<AddApiaryDialog> {
       ),
       actions: [
         TextButton(
-          onPressed: _isSaving ? null : () => Navigator.pop(context),
+          onPressed: () => Navigator.pop(context),
           child: const Text("Cancel"),
         ),
         ElevatedButton(
-          onPressed: _isSaving ? null : _submit,
-          child: _isSaving 
-            ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
-            : const Text("Add"),
+          onPressed: _submit,
+          child: const Text("Add"),
         ),
       ],
     );

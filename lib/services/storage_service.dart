@@ -11,15 +11,8 @@ class StorageService {
   Future<String> _getUserId() async {
     User? user = _auth.currentUser;
     if (user == null) {
-      try {
-        final cred = await _auth.signInAnonymously();
-        user = cred.user;
-      } catch (e) {
-        print("Auth error: $e");
-        throw Exception("Authentication failed: $e");
-      }
+      throw Exception("User is not logged in");
     }
-    if (user == null) throw Exception("User is null after sign in");
     return user.uid;
   }
 
@@ -90,13 +83,16 @@ class StorageService {
 
   Future<void> addHive(Hive hive) async {
     final uid = await _getUserId();
+    print("storage: addHive ${hive.name} for user $uid");
 
     await _db
         .collection('users')
         .doc(uid)
         .collection('hives')
         .doc(hive.id)
-        .set(hive.toJson());
+        .set(hive.toJson())
+        .timeout(const Duration(seconds: 5));
+    print("storage: addHive complete");
   }
 
   Future<void> updateHive(Hive updatedHive) async {
