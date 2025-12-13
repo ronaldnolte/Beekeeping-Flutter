@@ -51,9 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-      }
-    }
-  }
+
 
   Future<void> _handleSync() async {
     await _loadData();
