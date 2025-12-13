@@ -4,7 +4,7 @@
 			"path": ".."
 		},
 		{
-			"path": "../../Beekeeping-app"
+			"path": "../../Hive-forecast/hive_forecast_mobile"
 		}
 	],
 	"settings": {}

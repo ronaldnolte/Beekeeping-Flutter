@@ -16,6 +16,7 @@ class WeatherData {
   });
 }
 
+/*
 class HourlyForecast {
   final DateTime time;
   final double temperature;
@@ -120,5 +121,48 @@ class ScoreBreakdown {
     required this.precipitation,
     required this.humidity,
     required this.timeBonus,
+  });
+}
+*/
+
+// --- NEW MODELS (Migrated from Hive Forecast Mobile) ---
+
+class InspectionWindow {
+  final DateTime startTime;
+  final DateTime endTime;
+  final double score;
+  final double tempF;
+  final double windMph;
+  final double cloudCover;
+  final double precipProb;
+  final double humidity;
+  final String condition; 
+  final List<String> issues; 
+  final Map<String, int> scoreBreakdown;
+
+  InspectionWindow({
+    required this.startTime,
+    required this.endTime,
+    required this.score,
+    required this.tempF,
+    required this.windMph,
+    required this.cloudCover,
+    required this.precipProb,
+    required this.humidity,
+    required this.condition,
+    required this.issues,
+    required this.scoreBreakdown,
+  });
+}
+
+class DayForecast {
+  final String date;
+  final List<InspectionWindow> windows;
+  final String overallScore;
+
+  DayForecast({
+    required this.date,
+    required this.windows,
+    required this.overallScore,
   });
 }
