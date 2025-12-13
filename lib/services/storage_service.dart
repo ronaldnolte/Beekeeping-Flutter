@@ -51,9 +51,58 @@ class StorageService {
     print("storage: addApiary complete");
   }
 
-  Future<void> removeApiary(String id) async {
+Future<void> removeApiary(String id) async {
     final uid = await _getUserId();
 
+    // 1. Check for hives in this apiary
+    final hivesSnapshot = await _db
+        .collection('users')
+        .doc(uid)
+        .collection('hives')
+        .where('location', isEqualTo: id)
+        .get();
+
+    if (hivesSnapshot.docs.isNotEmpty) {
+      print("storage: removeApiary found ${hivesSnapshot.docs.length} hives to move");
+      
+      // 2. Find or Create Default Apiary (Zip 00000)
+      String targetApiaryId;
+      
+      final defaultApiarySnap = await _db
+          .collection('users')
+          .doc(uid)
+          .collection('apiaries')
+          .where('zipCode', isEqualTo: '00000')
+          .get();
+
+      if (defaultApiarySnap.docs.isNotEmpty) {
+        targetApiaryId = defaultApiarySnap.docs.first.id;
+      } else {
+        // Create it
+        final newApiary = Apiary(
+          id: DateTime.now().millisecondsSinceEpoch.toString(),
+          name: "Unassigned",
+          zipCode: "00000",
+          createdAt: DateTime.now().millisecondsSinceEpoch,
+        );
+        await addApiary(newApiary);
+        targetApiaryId = newApiary.id;
+      }
+
+      // 3. Move hives
+      final batch = _db.batch();
+      for (var doc in hivesSnapshot.docs) {
+        // We need to parse to Hive object to update correctly? 
+        // Actually we can just update the 'location' field if we trust the structure,
+        // but since we store full JSON objects, we should read-modify-write or just update the field if Firestore allows partial updates on map/json fields.
+        // Our 'updateHive' uses .set(), replacing the whole doc.
+        // Using .update({'location': targetApiaryId}) is safer/faster for this specific field change.
+        batch.update(doc.reference, {'location': targetApiaryId});
+      }
+      await batch.commit();
+    }
+
+    // 4. Delete the apiary
     await _db
         .collection('users')
         .doc(uid)

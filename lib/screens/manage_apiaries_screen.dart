@@ -74,7 +74,7 @@ class _ManageApiariesScreenState extends State<ManageApiariesScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text("Delete Apiary"),
-        content: Text("Are you sure you want to delete '${apiary.name}'? This cannot be undone."),
+        content: Text("Are you sure you want to delete '${apiary.name}'?\n\nAny hives in this apiary will be moved to 'Unassigned'."),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
@@ -146,10 +146,11 @@ class _ManageApiariesScreenState extends State<ManageApiariesScreen> {
                               );
                             },
                           ),
-                          IconButton(
-                            icon: const Icon(Icons.delete, color: Colors.red),
-                            onPressed: () => _deleteApiary(apiary),
-                          ),
+                          if (apiary.zipCode != '00000')
+                            IconButton(
+                              icon: const Icon(Icons.delete, color: Colors.red),
+                              onPressed: () => _deleteApiary(apiary),
+                            ),
                         ],
                       ),
                     );
