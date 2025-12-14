@@ -95145,41 +95145,41 @@ break
 case 1:return A.G(q,r)
 case 2:return A.F(o.at(-1),r)}})
 return A.H($async$u0,r)},
-apj(e2){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c,b,a,a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,b0,b1,b2,b3,b4,b5,b6,b7,b8,b9,c0,c1,c2,c3,c4,c5,c6,c7,c8,c9,d0=A.b([],t.JG),d1=e2.h(0,"hourly"),d2=J.ae(d1),d3=t.j,d4=d3.a(d2.h(d1,"time")),d5=d3.a(d2.h(d1,"temperature_2m")),d6=d3.a(d2.h(d1,"relative_humidity_2m")),d7=d3.a(d2.h(d1,"precipitation_probability")),d8=d3.a(d2.h(d1,"precipitation")),d9=d3.a(d2.h(d1,"weathercode")),e0=d3.a(d2.h(d1,"cloudcover")),e1=d3.a(d2.h(d1,"windspeed_10m"))
-d2=t.N
-s=A.u(d2,t.Cm)
-for(d3=J.ae(d4),r=t.t,q=0;q<d3.gD(d4);++q){p=A.kt(d3.h(d4,q))
+apj(e1){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c,b,a,a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,b0,b1,b2,b3,b4,b5,b6,b7,b8,b9,c0,c1,c2,c3,c4,c5,c6,c7,c8,c9=A.b([],t.JG),d0=e1.h(0,"hourly"),d1=J.ae(d0),d2=t.j,d3=d2.a(d1.h(d0,"time")),d4=d2.a(d1.h(d0,"temperature_2m")),d5=d2.a(d1.h(d0,"relative_humidity_2m")),d6=d2.a(d1.h(d0,"precipitation_probability")),d7=d2.a(d1.h(d0,"precipitation")),d8=d2.a(d1.h(d0,"weathercode")),d9=d2.a(d1.h(d0,"cloudcover")),e0=d2.a(d1.h(d0,"windspeed_10m"))
+d1=t.N
+s=A.u(d1,t.Cm)
+for(d2=J.ae(d3),r=t.t,q=0;q<d2.gD(d3);++q){p=A.kt(d2.h(d3,q))
 o=A.Na("yyyy-MM-dd",null).ie(p)
 if(!s.aw(o))s.m(0,o,A.b([],r))
 s.h(0,o).push(q)}n=[6,8,10,12,14,16]
-for(r=new A.f_(s,s.r,s.e),m=t.S,l=t.s,k=J.ae(d6),j=J.ae(d9),i=J.ae(d8),h=J.ae(d7),g=J.ae(e0),f=J.ae(e1),e=J.ae(d5);r.u();){d=s.h(0,r.d)
+for(r=new A.f_(s,s.r,s.e),m=t.S,l=t.s,k=J.ae(d5),j=J.ae(d8),i=J.ae(d7),h=J.ae(d6),g=J.ae(d9),f=J.ae(e0),e=J.ae(d4);r.u();){d=s.h(0,r.d)
 d.toString
 for(c=0;c<6;++c){b=n[c]
 a0=d.length
 a1=0
 for(;;){if(!(a1<d.length)){a=null
 break}a2=d[a1]
-if(A.jN(A.kt(d3.h(d4,a2)))===b){a=a2
-break}d.length===a0||(0,A.A)(d);++a1}if(a!=null&&a+1<d3.gD(d4)){a0=a+1
-a3=[e.h(d5,a),e.h(d5,a0)]
+if(A.jN(A.kt(d2.h(d3,a2)))===b){a=a2
+break}d.length===a0||(0,A.A)(d);++a1}if(a!=null&&a+1<d2.gD(d3)){a0=a+1
+a3=[e.h(d4,a),e.h(d4,a0)]
 a4=A.T(a3).i("Q<1,N>")
 a5=A.U(new A.Q(a3,new A.aor(),a4),a4.i("a0.E"))
-a3=[f.h(e1,a),f.h(e1,a0)]
+a3=[f.h(e0,a),f.h(e0,a0)]
 a4=A.T(a3).i("Q<1,N>")
 a6=A.U(new A.Q(a3,new A.aos(),a4),a4.i("a0.E"))
-a3=[g.h(e0,a),g.h(e0,a0)]
+a3=[g.h(d9,a),g.h(d9,a0)]
 a4=A.T(a3).i("Q<1,N>")
 a7=A.U(new A.Q(a3,new A.aot(),a4),a4.i("a0.E"))
-a3=[h.h(d7,a),h.h(d7,a0)]
+a3=[h.h(d6,a),h.h(d6,a0)]
 a4=A.T(a3).i("Q<1,N>")
 a8=A.U(new A.Q(a3,new A.aoA(),a4),a4.i("a0.E"))
-a3=[i.h(d8,a),i.h(d8,a0)]
+a3=[i.h(d7,a),i.h(d7,a0)]
 a4=A.T(a3).i("Q<1,N>")
 a9=A.U(new A.Q(a3,new A.aoB(),a4),a4.i("a0.E"))
-a3=[j.h(d9,a),j.h(d9,a0)]
+a3=[j.h(d8,a),j.h(d8,a0)]
 a4=A.T(a3).i("Q<1,n>")
 b0=A.U(new A.Q(a3,new A.aoC(),a4),a4.i("a0.E"))
-a0=[k.h(d6,a),k.h(d6,a0)]
+a0=[k.h(d5,a),k.h(d5,a0)]
 a3=A.T(a0).i("Q<1,N>")
 b1=A.U(new A.Q(a0,new A.aoD(),a3),a3.i("a0.E"))
 b2=B.b.hp(a5,new A.aoE())/2
@@ -95198,7 +95198,7 @@ if(b8>24)c2.push("Too Windy (> 24mph)")
 if(b9>49)c2.push("Rain Likely (> 49%)")
 if(c0>0.02)c2.push("Raining")
 if(c1)c2.push("Stormy Weather")
-c3=A.u(d2,m)
+c3=A.u(d1,m)
 if(b2>=75)c4=40
 else if(b2>=70)c4=37
 else if(b2>=65)c4=33
@@ -95225,12 +95225,10 @@ else c7=b5<=49?1:0
 c3.m(0,"Precipitation",c7)
 c8=b6>=30&&b6<=70?5:0
 c3.m(0,"Humidity",c8)
-c9=c4+c5+c6+c7+c8
-if(c2.length!==0)c9=0
-a0=A.kt(d3.h(d4,a))
-A.kt(d3.h(d4,a)).P4(72e8)
+a0=A.kt(d2.h(d3,a))
+A.kt(d2.h(d3,a)).P4(72e8)
 this.Rq(b0[0])
-d0.push(new A.jz(a0,c9,b2,b3,b4,b5,b6,c2,c3))}}}return d0},
+c9.push(new A.jz(a0,c4+c5+c6+c7+c8,b2,b3,b4,b5,b6,c2,c3))}}}return c9},
 Rq(a){if(a===0)return"Clear"
 if(a<=3)return"Partly Cloudy"
 if(a<=48)return"Foggy"
