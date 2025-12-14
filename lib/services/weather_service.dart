@@ -442,9 +442,9 @@ class WeatherService {
                 totalScore += humidityScore;
 
                 // Override total score if kill conditions exist, but keep breakdown
-                if (issues.isNotEmpty) {
-                    totalScore = 0;
-                }
+                // if (issues.isNotEmpty) {
+                //     totalScore = 0;
+                // }
 
                 windows.add(InspectionWindow(
                   startTime: DateTime.parse(times[i]),
