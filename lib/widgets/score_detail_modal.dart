@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import '../models/weather_models.dart';
 
@@ -169,3 +170,4 @@ class ScoreDetailModal extends StatelessWidget {
     );
   }
 }
+*/

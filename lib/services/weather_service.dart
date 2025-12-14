@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/weather_models.dart';
 import '../utils/scoring_logic.dart';
+import 'package:intl/intl.dart';
 
 /*
 class WeatherService {
@@ -189,7 +190,7 @@ class WeatherService {
 
 // --- NEW SERVICE (Migrated from Hive Forecast Mobile) ---
 
-import 'package:intl/intl.dart';
+
 
 class WeatherService {
   static const String _zipApiUrl = 'https://api.zippopotam.us/us/';

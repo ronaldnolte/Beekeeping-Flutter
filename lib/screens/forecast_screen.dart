@@ -7,6 +7,7 @@ import '../utils/scoring_logic.dart';
 import '../widgets/score_detail_modal.dart';
 import '../utils/theme.dart';
 
+/*
 class ForecastScreen extends StatefulWidget {
   const ForecastScreen({super.key});
 
@@ -222,6 +223,7 @@ class _ForecastScreenState extends State<ForecastScreen> {
     );
   }
 }
+*/
 
 /*
 class _LegendItem extends StatelessWidget {
