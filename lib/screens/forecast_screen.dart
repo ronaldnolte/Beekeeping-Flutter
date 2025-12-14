@@ -6,6 +6,7 @@ import '../services/weather_service.dart';
 import '../utils/scoring_logic.dart';
 import '../widgets/score_detail_modal.dart';
 import '../utils/theme.dart';
+import '../widgets/scoring_info_dialog.dart';
 
 /*
 class ForecastScreen extends StatefulWidget {
@@ -369,8 +370,8 @@ class _ForecastScreenState extends State<ForecastScreen> {
                 ),
                 const SizedBox(width: 8),
                 InkWell(
-                  // Info Dialog removed for now or can be added later
-                  onTap: () {}, 
+                  // Show Score Info Dialog
+                  onTap: () => showDialog(context: context, builder: (_) => const ScoringInfoDialog()), 
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
